@@ -27,11 +27,8 @@ public class Student{
     @Column(name="rut")
     private String rut;
     
-    @Column(name="firstName")
+    @Column(name="name")
     private String firstName;
-    
-    @Column(name="lastName")
-    private String lastName;
     
     @Column(name="age")
     private short age;
@@ -41,8 +38,7 @@ public class Student{
 
     public void setFromStudent( Student newStudent ){
         this.rut = newStudent.getRut();
-        this.firstName = newStudent.getFirstName();
-        this.lastName = newStudent.getLastName();
+        this.name = newStudent.name();
         this.age = newStudent.getAge();
         this.career = newStudent.getCareer();
     }
