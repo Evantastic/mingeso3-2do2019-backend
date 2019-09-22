@@ -11,6 +11,9 @@ public class BackendApplicationTests {
 
 	@Test
 	public void contextLoads() {
+		/*
+		* Test que se encarga de ver que las conexiones esten hechas
+		 */
 	}
 
 }
