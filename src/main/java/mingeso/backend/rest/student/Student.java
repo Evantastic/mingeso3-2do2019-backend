@@ -13,6 +13,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 @Entity
 @Data
@@ -49,5 +50,9 @@ public class Student{
         this.lastName = newStudent.getLastName();
         this.birth = newStudent.getBirth();
         this.career = newStudent.getCareer();
+    }
+
+    public int getAge() {
+        return Period.between(this.getBirth(), LocalDate.now()).getYears();
     }
 }
