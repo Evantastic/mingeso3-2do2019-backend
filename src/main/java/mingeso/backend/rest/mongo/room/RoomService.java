@@ -1,10 +1,10 @@
 package mingeso.backend.rest.mongo.room;
 
-import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @NoArgsConstructor
@@ -13,7 +13,7 @@ public class RoomService {
   @Autowired
   private RoomRepository repository;
 
-  public Iterable<Room> getAll() {
+  public List<Room> getAll() {
     return repository.findAll();
   }
 

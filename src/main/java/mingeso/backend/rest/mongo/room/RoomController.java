@@ -2,8 +2,9 @@ package mingeso.backend.rest.mongo.room;
 
 
 import lombok.AllArgsConstructor;
-import org.bson.types.ObjectId;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @AllArgsConstructor
@@ -14,7 +15,7 @@ public class RoomController {
   private final RoomService service;
 
   @GetMapping()
-  public Iterable<Room> getAll() {
+  public List<Room> getAll() {
     return service.getAll();
   }
 

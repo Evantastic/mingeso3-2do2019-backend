@@ -11,7 +11,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.Optional;
+import java.util.*;
 
 @RunWith(SpringRunner.class)
 public class RoomServiceTest {
@@ -32,7 +32,7 @@ public class RoomServiceTest {
   private RoomRepository repository;
 
   @Before
-  public void setUp() {
+  public void setUpFindById() {
     Room room = new Room();
     room.setId("5d9a411d7d365f68746fc3d3");
     Optional<Room> optionalRoom = Optional.of(room);
@@ -41,11 +41,45 @@ public class RoomServiceTest {
       .thenReturn(optionalRoom);
   }
 
+  @Before
+  public void setUpCreate() {
+    Room room = new Room();
+    Room found = new Room();
+    found.setId("5d9a411d7d365f68746fc3d3");
+    Mockito.when(repository.save(room)).thenReturn(found);
+  }
+
+  @Before
+  public void setUpGetAll() {
+    Room room1 = new Room();
+    Room room2 = new Room();
+    Room room3 = new Room();
+    List<Room> rooms = new ArrayList<>();
+    rooms.add(room1);
+    rooms.add(room2);
+    rooms.add(room3);
+    Mockito.when(repository.findAll()).thenReturn(rooms);
+  }
+
   @Test
-  public void whenValidIdThenRoomShouldBeFound() {
+  public void whenValidIdRoomThenRoomShouldBeFound() {
     String id = "5d9a411d7d365f68746fc3d3";
     Room found = service.getById(id);
     Assertions.assertThat(found.getId()).isEqualTo(id);
+  }
+
+  @Test
+  public void whenCreateRoomThenRoomShouldBeReturned() {
+    String id = "5d9a411d7d365f68746fc3d3";
+    Room room = new Room();
+    Room found = service.create(room);
+    Assertions.assertThat(found.getId()).isEqualTo(id);
+  }
+
+  @Test
+  public void whenFindAllRoomThenReturnAll() {
+    List<Room> found = service.getAll();
+    Assertions.assertThat(found.size()).isEqualTo(3);
   }
 
 }

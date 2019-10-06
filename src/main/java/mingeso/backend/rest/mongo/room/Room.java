@@ -2,9 +2,7 @@ package mingeso.backend.rest.mongo.room;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -15,6 +13,22 @@ import java.util.List;
 @NoArgsConstructor
 @Document("Room")
 public class Room {
+
+  @Data
+  @AllArgsConstructor
+  @NoArgsConstructor
+  private static class Extra {
+    private String type;
+    private int quantity;
+  }
+
+  @Data
+  @AllArgsConstructor
+  @NoArgsConstructor
+  private static class Bed {
+    private String type;
+    private int quantity;
+  }
 
   @Id
   private String id;
