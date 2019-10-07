@@ -39,4 +39,7 @@ public class Reserve {
     @Column(name="price")
     private int price;
 
+
+
+
 }

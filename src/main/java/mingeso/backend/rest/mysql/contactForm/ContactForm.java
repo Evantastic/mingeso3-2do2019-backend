@@ -1,12 +1,10 @@
 package mingeso.backend.rest.mysql.contactForm;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
-import java.time.LocalDate;
 
 @Entity
 @Data
@@ -32,4 +30,11 @@ public class ContactForm {
 
     @Column(name="details")
     private String details;
+
+    public void setFromContactForm(ContactForm newContactForm){
+        this.name = newContactForm.getName();
+        this.email = newContactForm.getEmail();
+        this.phone = newContactForm.getPhone();
+        this.details = newContactForm.getDetails();
+    }
 }
