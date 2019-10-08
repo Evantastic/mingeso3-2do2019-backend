@@ -34,18 +34,18 @@ public class RoomTypeServiceTest {
   @MockBean
   private RoomRepository repository;
 
-  private final String presidencial = "presidencial";
-  private final String rey = "rey";
+  private final static String presidencial = "presidencial";
+  private final static String rey = "rey";
 
   @Before
   public void setUpGetTypesOfRoom() {
     List<Room> found = new ArrayList<>();
     Room room1 = new Room();
-    room1.setType(this.presidencial);
+    room1.setType(presidencial);
     Room room2 = new Room();
-    room2.setType(this.rey);
+    room2.setType(rey);
     Room room3 = new Room();
-    room3.setType(this.rey);
+    room3.setType(rey);
     found.add(room1);
     found.add(room2);
     found.add(room3);
@@ -55,17 +55,17 @@ public class RoomTypeServiceTest {
   @Before
   public void setUpGetRoomByType() {
     Room room = new Room();
-    room.setType(this.presidencial);
+    room.setType(presidencial);
     Optional<Room> found = Optional.of(room);
-    Mockito.when(repository.findFirstByType(this.presidencial)).thenReturn(found);
+    Mockito.when(repository.findFirstByType(presidencial)).thenReturn(found);
   }
 
   @Test
   public void whenGetTypesOfRoomReturnListOfStrings() {
     List<String> found = service.getTypesOfRoom();
     List<String> types = new ArrayList<>();
-    types.add(this.rey);
-    types.add(this.presidencial);
+    types.add(rey);
+    types.add(presidencial);
     Assertions.assertThat(found)
       .containsAll(types)
       .doesNotHaveDuplicates();
@@ -73,8 +73,8 @@ public class RoomTypeServiceTest {
 
   @Test
   public void whenGetRoomByTypeThenReturnCorrectRoom() {
-    Room room = service.getRoomByType(this.presidencial);
-    Assertions.assertThat(room.getType()).isEqualTo(this.presidencial);
+    Room room = service.getRoomByType(presidencial);
+    Assertions.assertThat(room.getType()).isEqualTo(presidencial);
   }
 
 }
