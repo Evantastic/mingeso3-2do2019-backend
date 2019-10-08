@@ -17,11 +17,6 @@
 
   <properties>
     <java.version>1.8</java.version>
-    <sonar.exclusions>
-      **/config/*.java,
-      **/test/**/*.java,
-      **/BackendApplication.java
-    </sonar.exclusions>
   </properties>
 
   <dependencies>
@@ -87,6 +82,13 @@
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
         <version>0.8.4</version>
+        <configuration>
+          <excludes>
+            <exclude>**/config/**/*.java</exclude>
+            <exclude>**/test/**/*.java</exclude>
+            <exclude>**/BackendApplication.java</exclude>
+          </excludes>
+        </configuration>
         <executions>
           <execution>
             <id>default-prepare-agent</id>
