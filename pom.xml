@@ -19,7 +19,7 @@
     <java.version>1.8</java.version>
     <sonar.exclusions>
       **/config/*.java,
-      **/test/*.java
+      **/test/**/*.java,
       **/BackendApplication.java
     </sonar.exclusions>
   </properties>
