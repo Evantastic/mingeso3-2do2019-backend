@@ -39,10 +39,10 @@ public class RoomControllerTest {
   @Autowired
   private ObjectMapper mapper;
 
-  private final static String ID = "5d9a411d7d365f68746fc3d3";
-  private final static String TYPE = "presidencial";
-  private final static String URL = "/api/rest/rooms";
-  private final static int NUMBER = 50;
+  private static final String ID = "5d9a411d7d365f68746fc3d3";
+  private static final String TYPE = "presidencial";
+  private static final String URL = "/api/rest/rooms";
+  private static final int NUMBER = 50;
 
   @Test
   public void givenRoomWhenGetRoomsThenReturnJsonArray() throws Exception {

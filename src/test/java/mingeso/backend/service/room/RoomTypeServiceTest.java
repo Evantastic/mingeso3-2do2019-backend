@@ -34,8 +34,8 @@ public class RoomTypeServiceTest {
   @MockBean
   private RoomRepository repository;
 
-  private final static String PRESIDENTIAL = "presidencial";
-  private final static String KING = "rey";
+  private static final String PRESIDENTIAL = "presidencial";
+  private static final String KING = "rey";
 
   @Before
   public void setUpGetTypesOfRoom() {

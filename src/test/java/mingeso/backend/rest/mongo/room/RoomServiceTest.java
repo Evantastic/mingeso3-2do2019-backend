@@ -31,7 +31,7 @@ public class RoomServiceTest {
   @MockBean
   private RoomRepository repository;
 
-  private final static String ID = "5d9a411d7d365f68746fc3d3";
+  private static final String ID = "5d9a411d7d365f68746fc3d3";
 
   @Before
   public void setUpFindById() {

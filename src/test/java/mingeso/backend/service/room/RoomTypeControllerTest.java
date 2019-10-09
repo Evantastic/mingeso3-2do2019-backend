@@ -33,9 +33,6 @@ public class RoomTypeControllerTest {
   @MockBean
   private RoomTypeService service;
 
-  @Autowired
-  private ObjectMapper mapper;
-
   private static final String URL = "/api/service/rooms/types";
   private static final String TYPE1 = "type1";
   private static final String TYPE2 = "type2";
