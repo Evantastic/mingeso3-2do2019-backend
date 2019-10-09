@@ -31,12 +31,12 @@ public class RoomServiceTest {
   @MockBean
   private RoomRepository repository;
 
-  private final static String id = "5d9a411d7d365f68746fc3d3";
+  private final static String ID = "5d9a411d7d365f68746fc3d3";
 
   @Before
   public void setUpFindById() {
     Room room = new Room();
-    room.setId(id);
+    room.setId(ID);
     Optional<Room> optionalRoom = Optional.of(room);
 
     Mockito.when(repository.findById(room.getId()))
@@ -47,7 +47,7 @@ public class RoomServiceTest {
   public void setUpCreate() {
     Room room = new Room();
     Room found = new Room();
-    found.setId(id);
+    found.setId(ID);
     Mockito.when(repository.save(room)).thenReturn(found);
   }
 
@@ -65,15 +65,15 @@ public class RoomServiceTest {
 
   @Test
   public void whenValidIdRoomThenRoomShouldBeFound() {
-    Room found = service.getById(id);
-    Assertions.assertThat(found.getId()).isEqualTo(id);
+    Room found = service.getById(ID);
+    Assertions.assertThat(found.getId()).isEqualTo(ID);
   }
 
   @Test
   public void whenCreateRoomThenRoomShouldBeReturned() {
     Room room = new Room();
     Room found = service.create(room);
-    Assertions.assertThat(found.getId()).isEqualTo(id);
+    Assertions.assertThat(found.getId()).isEqualTo(ID);
   }
 
   @Test

@@ -17,7 +17,7 @@ public class Room {
   @Data
   @AllArgsConstructor
   @NoArgsConstructor
-  private static class Extra {
+  public static class Extra {
     private String type;
     private int quantity;
   }
@@ -25,7 +25,7 @@ public class Room {
   @Data
   @AllArgsConstructor
   @NoArgsConstructor
-  private static class Bed {
+  public static class Bed {
     private String type;
     private int quantity;
   }
