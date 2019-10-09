@@ -26,7 +26,7 @@ public class Reserve {
     private int clientId;
 
     @Column(name = "roomid", unique = false, nullable = false)
-    private int roomid;
+    private String roomId;
 
     @Column(name = "starDate")
     @JsonFormat(pattern = "dd-MM-yyyy")
@@ -39,7 +39,12 @@ public class Reserve {
     @Column(name="price")
     private int price;
 
+    public void setFromReserve(Reserve newReserve){
 
-
-
+        this.clientId = newReserve.getClientId();
+        this.roomId = newReserve.getRoomId();
+        this.startDate = newReserve.getStartDate();
+        this.endDate = newReserve.getEndDate();
+        this.price = newReserve.getPrice();
+    }
 }
