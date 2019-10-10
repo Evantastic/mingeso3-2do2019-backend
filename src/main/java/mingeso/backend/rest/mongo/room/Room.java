@@ -14,34 +14,15 @@ import java.util.List;
 @Document("Room")
 public class Room {
 
-  @Data
-  @AllArgsConstructor
-  @NoArgsConstructor
-  public static class Extra {
-    private String type;
-    private int quantity;
-  }
-
-  @Data
-  @AllArgsConstructor
-  @NoArgsConstructor
-  public static class Bed {
-    private String type;
-    private int quantity;
-  }
-
   @Id
   private String id;
 
+  private String url;
+  private String title;
   private int price;
-  private int capacity;
-  private int floor;
-  private int roomNumber;
-  private List<Extra> extras;
-  private List<Bed> beds;
-  private List<String> services;
-  private String view;
   private String description;
-  private String type;
+  private int beds;
+  private int capacity;
+  private List<String> services;
 
 }

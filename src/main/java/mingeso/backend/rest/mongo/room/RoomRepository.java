@@ -8,8 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface RoomRepository extends MongoRepository<Room, ObjectId> {
+public interface RoomRepository extends MongoRepository<Room, String> {
   List<Room> findAll();
-  Optional<Room> findById(String id);
-  Optional<Room> findFirstByType(String type);
+  Optional<Room> findFirstByTitle(String title);
 }

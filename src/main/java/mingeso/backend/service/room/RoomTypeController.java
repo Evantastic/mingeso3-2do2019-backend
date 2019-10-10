@@ -15,12 +15,7 @@ public class RoomTypeController {
   private final RoomTypeService service;
 
   @GetMapping()
-  public List<String> getTypesOfRoom() {
-    return service.getTypesOfRoom();
-  }
-
-  @GetMapping("/{type}")
-  public Room getRoomByType(@PathVariable String type) {
-    return service.getRoomByType(type);
+  public List<Room> getTypesOfRoom() {
+    return service.getTitlesOfRoom();
   }
 }

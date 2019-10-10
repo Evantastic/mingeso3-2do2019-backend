@@ -25,4 +25,13 @@ public class RoomService {
     return repository.save(newRoom);
   }
 
+  public Room delete(String id) {
+      if (repository.existsById(id)) {
+        Room room = this.getById(id);
+        repository.delete(room);
+        return room;
+      }
+      return null;
+  }
+
 }

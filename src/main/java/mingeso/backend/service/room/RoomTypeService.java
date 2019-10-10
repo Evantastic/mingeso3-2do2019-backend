@@ -16,20 +16,24 @@ public class RoomTypeService {
   @Autowired
   private RoomRepository repository;
 
-  public List<String> getTypesOfRoom() {
-    List<Room> rooms = repository.findAll();
-    List<String> types = new ArrayList<>();
+  private static boolean hasTitle(List<Room> rooms, String title) {
     for (Room room: rooms) {
-      if (types.contains(room.getType())) {
-        continue;
+      if (room.getTitle().equalsIgnoreCase(title)) {
+        return true;
       }
-      types.add(room.getType());
     }
-    return types;
+    return false;
   }
 
-  public Room getRoomByType(String type) {
-    return repository.findFirstByType(type).orElse(null);
+  public List<Room> getTitlesOfRoom() {
+    List<Room> rooms = new ArrayList<>();
+    for (Room room : repository.findAll()) {
+      if (hasTitle(rooms, room.getTitle())) {
+        continue;
+      }
+      rooms.add(room);
+    }
+    return rooms;
   }
 
 }
