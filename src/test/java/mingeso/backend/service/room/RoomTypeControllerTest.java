@@ -1,6 +1,5 @@
 package mingeso.backend.service.room;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import mingeso.backend.rest.mongo.room.Room;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,33 +33,25 @@ public class RoomTypeControllerTest {
   private RoomTypeService service;
 
   private static final String URL = "/api/service/rooms/types";
-  private static final String TYPE1 = "type1";
-  private static final String TYPE2 = "type2";
+  private static final String TITLE1 = "type1";
+  private static final String TITLE2 = "type2";
 
   @Test
-  public void givenTwoTypesOfRoomWhenGetTypesOfRoomReturnJsonArray()
+  public void givenTwoTitleOfRoomWhenGetTitlesOfRoomReturnJsonArray()
     throws Exception {
-    List<String> types = Arrays.asList(TYPE1, TYPE2);
-    given(service.getTypesOfRoom()).willReturn(types);
+    Room room1 = new Room();
+    Room room2 = new Room();
+    room1.setTitle(TITLE1);
+    room2.setTitle(TITLE2);
+    List<Room> titles = Arrays.asList(room1, room2);
+    given(service.getTitlesOfRoom()).willReturn(titles);
     mvc.perform(get(URL)
       .contentType(APPLICATION_JSON))
       .andExpect(status().isOk())
       .andExpect(jsonPath("$", hasSize(2)))
-      .andExpect(jsonPath("$[0]",
-        is(TYPE1)))
-      .andExpect(jsonPath("$[1]",
-        is(TYPE2)));
-  }
-
-  @Test
-  public void givenRoomWithTypeWhenGetByTypeThenReturnRoom() throws Exception {
-    Room room = new Room();
-    room.setType(TYPE1);
-    given(service.getRoomByType(TYPE1)).willReturn(room);
-    mvc.perform(get(URL + "/" + TYPE1)
-      .contentType(APPLICATION_JSON))
-      .andExpect(status().isOk())
-      .andExpect(jsonPath("$.type",
-        is(TYPE1)));
+      .andExpect(jsonPath("$[0].title",
+        is(TITLE1)))
+      .andExpect(jsonPath("$[1].title",
+        is(TITLE2)));
   }
 }

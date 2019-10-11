@@ -28,4 +28,7 @@ public class RoomController {
   public Room create(@RequestBody Room newRoom) {
     return service.create(newRoom);
   }
+
+  @DeleteMapping("/{id}")
+  public Room delete(@PathVariable String id) {return service.delete(id);}
 }

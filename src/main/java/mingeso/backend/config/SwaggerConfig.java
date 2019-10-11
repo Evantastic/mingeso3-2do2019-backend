@@ -1,4 +1,4 @@
-package mingeso.backend.rest;
+package mingeso.backend.config;
 
 
 import org.springframework.context.annotation.Bean;

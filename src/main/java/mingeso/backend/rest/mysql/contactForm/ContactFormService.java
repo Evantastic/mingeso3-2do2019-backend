@@ -1,6 +1,5 @@
 package mingeso.backend.rest.mysql.contactForm;
 
-
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Slice;

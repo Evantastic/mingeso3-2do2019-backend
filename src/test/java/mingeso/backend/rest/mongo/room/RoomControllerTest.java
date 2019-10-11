@@ -40,7 +40,7 @@ public class RoomControllerTest {
   private ObjectMapper mapper;
 
   private static final String ID = "5d9a411d7d365f68746fc3d3";
-  private static final String TYPE = "presidencial";
+  private static final String TITLE = "presidencial";
   private static final String URL = "/api/rest/rooms";
   private static final int NUMBER = 50;
 
@@ -48,7 +48,7 @@ public class RoomControllerTest {
   public void givenRoomWhenGetRoomsThenReturnJsonArray() throws Exception {
     Room room = new Room();
     List<Room> allRooms = new ArrayList<>();
-    room.setType(TYPE);
+    room.setTitle(TITLE);
     allRooms.add(room);
     given(service.getAll()).willReturn(allRooms);
     mvc.perform(get(URL)
@@ -56,8 +56,8 @@ public class RoomControllerTest {
       .andExpect(status().isOk())
       .andExpect(jsonPath("$",
         hasSize(1)))
-      .andExpect(jsonPath("$[0].type",
-        is(TYPE)));
+      .andExpect(jsonPath("$[0].title",
+        is(TITLE)));
   }
 
   @Test
@@ -74,9 +74,8 @@ public class RoomControllerTest {
 
   @Test
   public void whenCreateRoomThenReturnJson() throws Exception {
-    Room room = new Room(ID, NUMBER, NUMBER, NUMBER, NUMBER,
-      new ArrayList<>(), new ArrayList<>(),
-      Arrays.asList(TYPE, TYPE), TYPE, TYPE, TYPE);
+    Room room = new Room(ID, TITLE, TITLE, NUMBER, TITLE, NUMBER, NUMBER,
+      Arrays.asList(TITLE));
     given(service.create(room)).willReturn(room);
     MvcResult result = mvc.perform(post(URL)
       .contentType(APPLICATION_JSON)
