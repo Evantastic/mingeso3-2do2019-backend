@@ -6,13 +6,16 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Slice;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
+import java.io.FileNotFoundException;
+
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/rest/mysql/reserves")
 @CrossOrigin(origins = "*")
 public class ReserveController {
 
-    private final ReserveService reserveService;
+    private ReserveService reserveService;
 
     @GetMapping()
     public Slice<Reserve> getAll(@RequestParam(value = "page") int page, @RequestParam(value = "quantity") int quantity){
@@ -25,7 +28,7 @@ public class ReserveController {
     }
 
     @PostMapping()
-    public Reserve create(@RequestBody Reserve reserve) {
+    public Reserve create(@RequestBody Reserve reserve) throws FileNotFoundException, MessagingException {
         return reserveService.create(reserve);
     }
 

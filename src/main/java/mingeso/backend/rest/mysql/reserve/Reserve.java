@@ -1,6 +1,5 @@
 package mingeso.backend.rest.mysql.reserve;
 
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -41,10 +40,10 @@ public class Reserve {
 
     public void setFromReserve(Reserve newReserve){
 
-        this.clientId = newReserve.getClientId();
+        /*this.clientId = newReserve.getClientId();
         this.roomId = newReserve.getRoomId();
         this.startDate = newReserve.getStartDate();
         this.endDate = newReserve.getEndDate();
-        this.price = newReserve.getPrice();
+        this.price = newReserve.getPrice();*/
     }
 }
