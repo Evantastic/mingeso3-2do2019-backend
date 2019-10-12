@@ -4,8 +4,8 @@ import lombok.*;
 import mingeso.backend.rest.mongo.roomtype.RoomType;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Getter
-@Setter
+@EqualsAndHashCode(callSuper = true)
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Document("Room")
