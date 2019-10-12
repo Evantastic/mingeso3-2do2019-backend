@@ -1,6 +1,5 @@
-package mingeso.backend.rest.mongo.room;
+package mingeso.backend.rest.mongo.roomtype;
 
-import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,24 +8,24 @@ import java.util.List;
 
 @Service
 @NoArgsConstructor
-public class RoomService {
+public class RoomTypeService {
 
   @Autowired
-  private RoomRepository repository;
+  private RoomTypeRepository repository;
 
-  public List<Room> getAll() {
+  public List<RoomType> getAll() {
     return repository.findAll();
   }
 
-  public Room getById(String id) {
+  public RoomType getById(String id) {
     return repository.findById(id).orElse(null);
   }
 
-  public Room create(Room newRoom) {
-    return repository.save(newRoom);
+  public RoomType create(RoomType newRoomType) {
+    return repository.save(newRoomType);
   }
 
-  public Room delete(String id) {
+  public RoomType delete(String id) {
     return repository.findById(id)
       .map( room -> {
         repository.deleteById(id);
@@ -34,4 +33,5 @@ public class RoomService {
       })
       .orElse(null);
   }
+
 }
