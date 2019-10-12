@@ -3,25 +3,28 @@ package mingeso.backend.rest.mysql.reserve;
 
 
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import mingeso.backend.service.mail.EmailService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
 import java.io.FileNotFoundException;
+import java.util.List;
 
 
 @Service
-@AllArgsConstructor
+@NoArgsConstructor
 public class ReserveService {
 
+    @Autowired
     private ReserveRepository reserveRepository;
-    private EmailService emailService;
 
 
-    public Slice<Reserve> getAll(int page, int quantity) {
-        return reserveRepository.findAll(PageRequest.of(page, quantity));
+    public List<Reserve> getAll() {
+        return reserveRepository.findAll();
     }
 
     public Reserve getById(int id) {

@@ -1,19 +1,24 @@
 package mingeso.backend.rest.mysql.contactForm;
 
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
-@AllArgsConstructor
+@NoArgsConstructor
 public class ContactFormService {
 
-    private final ContactFormRepository contactFormRepository;
+    @Autowired
+    private ContactFormRepository contactFormRepository;
 
 
-    public Slice<ContactForm> getAll(int page, int quantity) {
-        return contactFormRepository.findAll(PageRequest.of(page, quantity));
+    public List<ContactForm> getAll() {
+        return contactFormRepository.findAll();
     }
 
     public ContactForm getById(int id) {

@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Slice;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/rest/mysql/contactForms")
@@ -13,8 +15,8 @@ public class ContactFormController {
     private final ContactFormService contactFormService;
 
     @GetMapping()
-    public Slice<ContactForm> getAll(@RequestParam(value = "page") int page, @RequestParam(value = "quantity") int quantity){
-        return contactFormService.getAll(page, quantity);
+    public List<ContactForm> getAll(){
+        return contactFormService.getAll();
     }
 
     @GetMapping("/{id}")

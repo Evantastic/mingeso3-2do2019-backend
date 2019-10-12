@@ -2,19 +2,23 @@ package mingeso.backend.rest.mysql.client;
 
 
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
-@AllArgsConstructor
+@NoArgsConstructor
 public class ClientService {
 
-    private final ClientRepository clientRepository;
+    @Autowired
+    private ClientRepository clientRepository;
 
-
-    public Slice<Client> getAll(int page, int quantity) {
-        return clientRepository.findAll(PageRequest.of(page, quantity));
+    public List<Client> getAll() {
+        return clientRepository.findAll();
     }
 
     public Client getById(int id) {

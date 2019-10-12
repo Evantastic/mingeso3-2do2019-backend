@@ -3,11 +3,11 @@ package mingeso.backend.rest.mysql.reserve;
 
 
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Slice;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
 import java.io.FileNotFoundException;
+import java.util.List;
 
 @RestController
 @AllArgsConstructor
@@ -18,8 +18,8 @@ public class ReserveController {
     private ReserveService reserveService;
 
     @GetMapping()
-    public Slice<Reserve> getAll(@RequestParam(value = "page") int page, @RequestParam(value = "quantity") int quantity){
-        return reserveService.getAll(page, quantity);
+    public List<Reserve> getAll(){
+        return reserveService.getAll();
     }
 
     @GetMapping("/{id}")
