@@ -39,32 +39,32 @@ public class ContactFormServiceTest {
 
     @Before
     public void setUpFindById() {
-        ContactForm contactFormType = new ContactForm();
-        contactFormType.setId(ID);
-        Optional<ContactForm> optionalContactForm = Optional.of(contactFormType);
+        ContactForm contactForm = new ContactForm();
+        contactForm.setId(ID);
+        Optional<ContactForm> optionalContactForm = Optional.of(contactForm);
 
-        Mockito.when(repository.findById(contactFormType.getId()))
+        Mockito.when(repository.findById(contactForm.getId()))
                 .thenReturn(optionalContactForm);
     }
 
     @Before
     public void setUpCreate() {
-        ContactForm contactFormType = new ContactForm();
+        ContactForm contactForm = new ContactForm();
         ContactForm found = new ContactForm();
         found.setId(ID);
-        Mockito.when(repository.save(contactFormType)).thenReturn(found);
+        Mockito.when(repository.save(contactForm)).thenReturn(found);
     }
 
     @Before
     public void setUpGetAll() {
-        ContactForm contactFormType1 = new ContactForm();
-        ContactForm contactFormType2 = new ContactForm();
-        ContactForm contactFormType3 = new ContactForm();
-        List<ContactForm> contactFormTypes = new ArrayList<>();
-        contactFormTypes.add(contactFormType1);
-        contactFormTypes.add(contactFormType2);
-        contactFormTypes.add(contactFormType3);
-        Mockito.when(repository.findAll()).thenReturn(contactFormTypes);
+        ContactForm contactForm1 = new ContactForm();
+        ContactForm contactForm2 = new ContactForm();
+        ContactForm contactForm3 = new ContactForm();
+        List<ContactForm> contactForms = new ArrayList<>();
+        contactForms.add(contactForm1);
+        contactForms.add(contactForm2);
+        contactForms.add(contactForm3);
+        Mockito.when(repository.findAll()).thenReturn(contactForms);
     }
 
     @Before
@@ -81,8 +81,8 @@ public class ContactFormServiceTest {
 
     @Test
     public void whenCreateContactFormThenContactFormShouldBeReturned() {
-        ContactForm contactFormType = new ContactForm();
-        ContactForm found = service.create(contactFormType);
+        ContactForm contactForm = new ContactForm();
+        ContactForm found = service.create(contactForm);
         Assertions.assertThat(found.getId()).isEqualTo(ID);
     }
 
