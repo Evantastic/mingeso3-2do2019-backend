@@ -30,7 +30,7 @@ public class ReserveService {
     }
 
     public Reserve create(Reserve reserve) throws FileNotFoundException, MessagingException {
-        emailService.sendSimpleMessage("gabogsc@gmail.com", "FUNCIONO CTM", "Sopla la diuca");
+        //emailService.sendEmailWithTemplate("gabogsc@gmail.com", "Reserva Habbo Hotel","Jose Perez");
         return reserveRepository.save(reserve);
     }
 

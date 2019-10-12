@@ -3,6 +3,7 @@ package mingeso.backend.service.mail;
 
 import com.google.common.io.Files;
 import org.apache.tomcat.util.http.fileupload.FileUtils;
+import org.aspectj.apache.bcel.util.ClassPath;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.SimpleMailMessage;
@@ -29,18 +30,17 @@ import java.util.Scanner;
 @Service
 public class EmailService {
 
-
     @Autowired
     public JavaMailSender emailSender;
 
-    public void sendSimpleMessage(String to, String subject, String text) throws FileNotFoundException, MessagingException {
+    public void sendEmailWithTemplate(String to, String subject,String nameClient) throws FileNotFoundException, MessagingException {
 
-        String path ="/home/gabriel/Escritorio/Back-Mingeso/mingeso3-2do2019-backend/src/main/java/mingeso/backend/service/mail/htmlMailResponse/index.html";
+        String path = "src/main/java/mingeso/backend/service/mail/htmlMailResponse/index.html";
         String htmlScript = new Scanner(new File(path)).useDelimiter("\\A").next();
-
+        String htmlFinalScript = htmlScript.replace("%{NOMBRE-CLIENTE}%",nameClient);
         MimeMessage message = emailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message,"utf-8");
-        helper.setText(htmlScript,true);
+        helper.setText(htmlFinalScript,true);
         helper.setTo(to);
         helper.setSubject(subject);
         emailSender.send(message);
