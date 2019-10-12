@@ -1,4 +1,4 @@
-package mingeso.backend.rest.mongo.room;
+package mingeso.backend.rest.mongo.roomtype;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Before;
@@ -11,35 +11,34 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @RunWith(SpringRunner.class)
-public class RoomServiceTest {
+public class RoomTypeServiceTest {
 
   @TestConfiguration
-  static class RoomServiceTestContextConfiguration {
+  static class RoomTypeServiceTestContextConfiguration {
+
     @Bean
-    public RoomService roomService() {
-      return new RoomService();
+    public RoomTypeService roomTypeService() {
+      return new RoomTypeService();
     }
   }
 
   @Autowired
-  private RoomService service;
+  private RoomTypeService service;
 
   @MockBean
-  private RoomRepository repository;
+  private RoomTypeRepository repository;
 
   private static final String ID = "5d9a411d7d365f68746fc3d3";
   private static final String INVALIDID = "5d9a411d7d365f68746fc315";
 
   @Before
   public void setUpFindById() {
-    Room roomType = new Room();
+    RoomType roomType = new RoomType();
     roomType.setId(ID);
-    Optional<Room> optionalRoom = Optional.of(roomType);
+    Optional<RoomType> optionalRoom = Optional.of(roomType);
 
     Mockito.when(repository.findById(roomType.getId()))
       .thenReturn(optionalRoom);
@@ -47,59 +46,57 @@ public class RoomServiceTest {
 
   @Before
   public void setUpCreate() {
-    Room roomType = new Room();
-    Room found = new Room();
+    RoomType roomType = new RoomType();
+    RoomType found = new RoomType();
     found.setId(ID);
     Mockito.when(repository.save(roomType)).thenReturn(found);
   }
 
   @Before
   public void setUpGetAll() {
-    Room roomType1 = new Room();
-    Room roomType2 = new Room();
-    Room roomType3 = new Room();
-    List<Room> roomTypes = new ArrayList<>();
+    RoomType roomType1 = new RoomType();
+    RoomType roomType2 = new RoomType();
+    RoomType roomType3 = new RoomType();
+    List<RoomType> roomTypes = new ArrayList<>();
     roomTypes.add(roomType1);
     roomTypes.add(roomType2);
     roomTypes.add(roomType3);
     Mockito.when(repository.findAll()).thenReturn(roomTypes);
   }
-
   @Before
   public void setUpFindByInvalidId() {
-    Optional<Room> empty = Optional.empty();
+    Optional<RoomType> empty = Optional.empty();
     Mockito.when(repository.findById(INVALIDID)).thenReturn(empty);
   }
 
   @Test
-  public void whenValidIdRoomThenRoomShouldBeFound() {
-    Room found = service.getById(ID);
+  public void whenValidIdRoomTypeThenRoomShouldBeFound() {
+    RoomType found = service.getById(ID);
     Assertions.assertThat(found.getId()).isEqualTo(ID);
   }
 
   @Test
-  public void whenCreateRoomThenRoomShouldBeReturned() {
-    Room roomType = new Room();
-    Room found = service.create(roomType);
+  public void whenCreateRoomTypeThenRoomShouldBeReturned() {
+    RoomType roomType = new RoomType();
+    RoomType found = service.create(roomType);
     Assertions.assertThat(found.getId()).isEqualTo(ID);
   }
 
   @Test
-  public void whenFindAllRoomThenReturnAll() {
-    List<Room> found = service.getAll();
+  public void whenFindAllRoomTypeThenReturnAll() {
+    List<RoomType> found = service.getAll();
     Assertions.assertThat(found.size()).isEqualTo(3);
   }
 
   @Test
   public void whenDeleteValidRoomThenReturnRoom() {
-    Room found = service.delete(ID);
+    RoomType found = service.delete(ID);
     Assertions.assertThat(found.getId()).isEqualTo(ID);
   }
 
   @Test
   public void whenDeleteInvalidRoomThenReturnNull() {
-    Room found = service.delete(INVALIDID);
+    RoomType found = service.delete(INVALIDID);
     Assertions.assertThat(found).isNull();
   }
-
 }

@@ -1,6 +1,7 @@
-package mingeso.backend.rest.mongo.room;
+package mingeso.backend.rest.mongo.roomtype;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,45 +10,48 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+
+import static org.mockito.BDDMockito.given;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.http.MediaType.APPLICATION_JSON;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.CoreMatchers.is;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.Matchers.hasSize;
-import static org.mockito.BDDMockito.given;
-import static org.springframework.http.MediaType.APPLICATION_JSON;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 @RunWith(SpringRunner.class)
-@WebMvcTest(RoomController.class)
+@WebMvcTest(RoomTypeController.class)
 @AutoConfigureDataMongo
-public class RoomControllerTest {
+public class RoomTypeControllerTest {
 
   @Autowired
   private MockMvc mvc;
 
   @MockBean
-  private RoomService service;
+  private RoomTypeService service;
 
   @Autowired
   private ObjectMapper mapper;
 
   private static final String ID = "5d9a411d7d365f68746fc3d3";
   private static final String TITLE = "type1";
-  private static final String URL = "/api/rest/mongo/rooms";
+  private static final String URL = "/api/rest/mongo/roomtypes";
   private static final int NUMBER = 50;
 
   @Test
   public void givenRoomWhenGetRoomsThenReturnJsonArray() throws Exception {
-    Room roomType = new Room();
-    List<Room> allRooms = new ArrayList<>();
+    RoomType roomType = new RoomType();
+    List<RoomType> allRoomTypes = new ArrayList<>();
     roomType.setTitle(TITLE);
-    allRooms.add(roomType);
-    given(service.getAll()).willReturn(allRooms);
+    allRoomTypes.add(roomType);
+    given(service.getAll()).willReturn(allRoomTypes);
     mvc.perform(get(URL)
       .contentType(APPLICATION_JSON))
       .andExpect(status().isOk())
@@ -59,7 +63,7 @@ public class RoomControllerTest {
 
   @Test
   public void givenIdWhenGetRoomByIdThenReturnJson() throws Exception {
-    Room roomType = new Room();
+    RoomType roomType = new RoomType();
     roomType.setId(ID);
     given(service.getById(ID)).willReturn(roomType);
     mvc.perform(get(URL + "/" + ID)
@@ -71,52 +75,29 @@ public class RoomControllerTest {
 
   @Test
   public void whenCreateRoomThenReturnJson() throws Exception {
-    Room room = new Room();
-    room.setTitle(TITLE);
-    room.setRoomNumber(NUMBER);
-    room.setId(ID);
-    room.setBeds(NUMBER);
-    room.setCapacity(NUMBER);
-    room.setDescription(TITLE);
-    room.setPrice(NUMBER);
-    room.setUrl(TITLE);
-    room.setServices(Collections.singletonList(TITLE));
-    given(service.create(room)).willReturn(room);
-    mvc.perform(post(URL)
+    RoomType roomType = new RoomType(ID, TITLE, TITLE, NUMBER, TITLE, NUMBER, NUMBER,
+      Collections.singletonList(TITLE));
+    given(service.create(roomType)).willReturn(roomType);
+    MvcResult result = mvc.perform(post(URL)
       .contentType(APPLICATION_JSON)
-      .content(mapper.writeValueAsString(room)))
+      .content(mapper.writeValueAsString(roomType)))
       .andExpect(status().isOk())
-      .andExpect(jsonPath("$.id",
-        is(room.getId())))
-      .andExpect(jsonPath("$.title",
-        is(room.getTitle())))
-      .andExpect(jsonPath("$.roomNumber",
-        is(room.getRoomNumber())))
-      .andExpect(jsonPath("$.beds",
-        is(room.getBeds())))
-      .andExpect(jsonPath("$.capacity",
-        is(room.getCapacity())))
-      .andExpect(jsonPath("$.description",
-        is(room.getDescription())))
-      .andExpect(jsonPath("$.price",
-        is(room.getPrice())))
-      .andExpect(jsonPath("$.url",
-        is(room.getUrl())))
-      .andExpect(jsonPath("$.services",
-        hasSize(1)))
-      .andExpect(jsonPath("$.services[0]",
-        is(room.getServices().get(0))));
+      .andReturn();
+    String response = result.getResponse().getContentAsString();
+    Assertions.assertThat(mapper.writeValueAsString(roomType))
+      .isEqualToIgnoringWhitespace(response);
   }
 
   @Test
   public void whenDeleteRoomThenReturnJson() throws Exception {
-    Room roomType = new Room(NUMBER);
+    RoomType roomType = new RoomType();
     roomType.setId(ID);
+    roomType.setTitle(TITLE);
     given(service.delete(roomType.getId())).willReturn(roomType);
     mvc.perform(delete(URL + "/" + ID)
       .contentType(APPLICATION_JSON))
       .andExpect(status().isOk())
-      .andExpect(jsonPath("$.roomNumber",
-        is(roomType.getRoomNumber())));
+      .andExpect(jsonPath("$.title",
+        is(roomType.getTitle())));
   }
 }

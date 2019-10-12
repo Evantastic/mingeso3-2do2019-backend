@@ -1,6 +1,5 @@
 package mingeso.backend.rest.mongo.room;
 
-
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -8,12 +7,11 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api/rest/rooms")
+@RequestMapping("/api/rest/mongo/rooms")
 @CrossOrigin(origins = "*")
 public class RoomController {
 
   private final RoomService service;
-
   @GetMapping()
   public List<Room> getAll() {
     return service.getAll();
@@ -31,4 +29,5 @@ public class RoomController {
 
   @DeleteMapping("/{id}")
   public Room delete(@PathVariable String id) {return service.delete(id);}
+
 }
