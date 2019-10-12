@@ -1,6 +1,5 @@
 package mingeso.backend.rest.mongo.room;
 
-import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
