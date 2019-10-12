@@ -34,4 +34,11 @@ public class Client {
 
     @Column(name="phone")
     private String phone;
+
+    public void setFromClient(Client newClient){
+        this.name = newClient.getName();
+        this.birth = newClient.getBirth();
+        this.email = newClient.getEmail();
+        this.phone = newClient.getPhone();
+    }
 }
