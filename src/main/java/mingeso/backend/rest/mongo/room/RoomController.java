@@ -12,6 +12,7 @@ import java.util.List;
 public class RoomController {
 
   private final RoomService service;
+
   @GetMapping()
   public List<Room> getAll() {
     return service.getAll();

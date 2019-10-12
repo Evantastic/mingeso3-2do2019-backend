@@ -9,9 +9,6 @@ import mingeso.backend.rest.mysql.reserve.ReserveService;
 import mingeso.backend.service.mail.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.mail.MessagingException;
-import java.io.FileNotFoundException;
 import java.time.Period;
 
 @Service
@@ -34,8 +31,7 @@ public class ReserveFormService {
   }
 
 
-  public Reserve makeReservation(ReserveForm form)
-    throws FileNotFoundException, MessagingException {
+  public Reserve makeReservation(ReserveForm form) {
     int days =
       Period.between(form.getStartDate(), form.getEndDate()).getDays();
     Client client = this.createOrFindCliend(form);

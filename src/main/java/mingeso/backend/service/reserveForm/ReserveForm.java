@@ -1,14 +1,13 @@
 package mingeso.backend.service.reserveForm;
 
-
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-
+import lombok.*;
 import java.time.LocalDate;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class ReserveForm {
 
   @JsonFormat(pattern = "dd-MM-yyyy")

@@ -11,39 +11,38 @@ import java.util.List;
 @NoArgsConstructor
 public class ReserveService {
 
-    @Autowired
-    private ReserveRepository reserveRepository;
+  @Autowired
+  private ReserveRepository reserveRepository;
 
 
-    public List<Reserve> getAll() {
-        return reserveRepository.findAll();
-    }
+  public List<Reserve> getAll() {
+    return reserveRepository.findAll();
+  }
 
-    public Reserve getById(int id) {
-        return reserveRepository.findById(id)
-                .orElse(null);
-    }
+  public Reserve getById(int id) {
+    return reserveRepository.findById(id)
+      .orElse(null);
+  }
 
-    public Reserve create(Reserve reserve) throws FileNotFoundException, MessagingException {
-        //emailService.sendEmailWithTemplate("gabogsc@gmail.com", "Reserva Habbo Hotel","Jose Perez");
-        return reserveRepository.save(reserve);
-    }
+  public Reserve create(Reserve reserve){
+    return reserveRepository.save(reserve);
+  }
 
-    public Reserve update(int id, Reserve newReserve) {
-        return reserveRepository.findById(id)
-                .map(contactForm -> {
-                    contactForm.setFromReserve(newReserve);
-                    return reserveRepository.save(contactForm);
-                })
-                .orElse(null);
-    }
+  public Reserve update(int id, Reserve newReserve) {
+    return reserveRepository.findById(id)
+      .map(contactForm -> {
+        contactForm.setFromReserve(newReserve);
+        return reserveRepository.save(contactForm);
+      })
+      .orElse(null);
+  }
 
-    public Reserve delete(int id) {
-        return reserveRepository.findById(id)
-                .map(contactForm -> {
-                    reserveRepository.delete(contactForm);
-                    return contactForm;
-                })
-                .orElse(null);
-    }
+  public Reserve delete(int id) {
+    return reserveRepository.findById(id)
+      .map(contactForm -> {
+        reserveRepository.delete(contactForm);
+        return contactForm;
+      })
+      .orElse(null);
+  }
 }

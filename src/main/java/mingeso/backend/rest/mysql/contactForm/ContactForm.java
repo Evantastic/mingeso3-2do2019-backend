@@ -1,39 +1,37 @@
 package mingeso.backend.rest.mysql.contactForm;
 
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import javax.persistence.*;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "ContactForm")
 public class ContactForm {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", unique = true, nullable = false)
-    private int id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  @Column(name = "id", unique = true, nullable = false)
+  private int id;
 
-    @Column(name = "name")
-    private String name;
+  @Column(name = "name")
+  private String name;
 
-    @Column(name="email")
-    private String email;
+  @Column(name="email")
+  private String email;
 
-    @Column(name="phone")
-    private String phone;
+  @Column(name="phone")
+  private String phone;
 
-    @Column(name="details")
-    private String details;
+  @Column(name="details")
+  private String details;
 
-    public void setFromContactForm(ContactForm newContactForm){
-        this.name = newContactForm.getName();
-        this.email = newContactForm.getEmail();
-        this.phone = newContactForm.getPhone();
-        this.details = newContactForm.getDetails();
-    }
+  public void setFromContactForm(ContactForm newContactForm){
+    this.name = newContactForm.getName();
+    this.email = newContactForm.getEmail();
+    this.phone = newContactForm.getPhone();
+    this.details = newContactForm.getDetails();
+  }
 }

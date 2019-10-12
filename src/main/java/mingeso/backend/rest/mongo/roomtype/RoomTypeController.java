@@ -1,9 +1,7 @@
 package mingeso.backend.rest.mongo.roomtype;
 
-
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
