@@ -1,19 +1,11 @@
 package mingeso.backend.rest.mysql.reserve;
 
-
-
-import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import mingeso.backend.service.mail.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
-
 import javax.mail.MessagingException;
 import java.io.FileNotFoundException;
 import java.util.List;
-
 
 @Service
 @NoArgsConstructor
