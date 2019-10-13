@@ -6,7 +6,6 @@ import mingeso.backend.rest.mysql.client.Client;
 import mingeso.backend.rest.mysql.client.ClientRepository;
 import mingeso.backend.rest.mysql.reserve.Reserve;
 import mingeso.backend.rest.mysql.reserve.ReserveService;
-import mingeso.backend.service.mail.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.Period;
@@ -18,8 +17,6 @@ public class ReserveFormService {
   private ClientRepository clientRepository;
   @Autowired
   private RoomService roomService;
-  @Autowired
-  private EmailService emailService;
   @Autowired
   private ReserveService reserveService;
 
@@ -44,9 +41,6 @@ public class ReserveFormService {
     }
     Client client = this.createOrFindClient(form);
     Reserve reserve = this.createReserve(form, room, client);
-    reserve = reserveService.create(reserve);
-    emailService.sendEmailWithTemplate(client.getEmail(),
-      Integer.toString(reserve.getId()), client.getName());
-    return reserve;
+    return reserveService.create(reserve);
   }
 }

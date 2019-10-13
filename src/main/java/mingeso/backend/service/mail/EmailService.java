@@ -3,17 +3,15 @@ package mingeso.backend.service.mail;
 import lombok.AllArgsConstructor;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.stereotype.Service;
 import javax.mail.internet.MimeMessage;
 import java.io.File;
 import java.util.Scanner;
 
-@Service
 @AllArgsConstructor
 public class EmailService {
 
   private final JavaMailSender emailSender;
-  private static final String PATH = "src/main/resources/index.html";
+  private static final String PATH = "";
 
   public void sendEmailWithTemplate(String to, String reserveId,
                                     String nameClient){
