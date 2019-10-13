@@ -110,8 +110,9 @@ public class RoomControllerTest {
 
   @Test
   public void whenDeleteRoomThenReturnJson() throws Exception {
-    Room roomType = new Room(NUMBER);
+    Room roomType = new Room();
     roomType.setId(ID);
+    roomType.setRoomNumber(NUMBER);
     given(service.delete(roomType.getId())).willReturn(roomType);
     mvc.perform(delete(URL + "/" + ID)
       .contentType(APPLICATION_JSON))
