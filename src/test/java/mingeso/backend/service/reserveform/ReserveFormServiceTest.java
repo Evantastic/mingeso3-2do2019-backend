@@ -35,7 +35,7 @@ public class ReserveFormServiceTest {
     client.setId(INTID);
     ReserveForm form = new ReserveForm();
     form.setEmail(EMAIL);
-    when(clientRepository.findByEmail(EMAIL)).thenReturn(Optional.of(client));
+    when(clientRepository.findFirstByEmail(EMAIL)).thenReturn(Optional.of(client));
     Client found = reserveFormService.createOrFindClient(form);
     assertThat(found.getId()).isEqualTo(INTID);
   }
@@ -44,7 +44,7 @@ public class ReserveFormServiceTest {
   public void whenCreateOrFindCllientByInvalidEmailThenReturnNewClient() {
     ReserveForm form = new ReserveForm();
     form.setEmail(EMAIL);
-    when(clientRepository.findByEmail(EMAIL)).thenReturn(Optional.empty());
+    when(clientRepository.findFirstByEmail(EMAIL)).thenReturn(Optional.empty());
     when(clientRepository.save(any(Client.class))).thenReturn(new Client());
     Client found = reserveFormService.createOrFindClient(form);
     assertThat(found.getId()).isNotEqualTo(INTID);

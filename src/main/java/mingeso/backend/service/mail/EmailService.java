@@ -22,7 +22,6 @@ public class EmailService {
       String htmlFinalScript = htmlScript.replace("%{NOMBRE-CLIENTE}%", nameClient);
       MimeMessage message = emailSender.createMimeMessage();
       MimeMessageHelper helper = new MimeMessageHelper(message, "utf-8");
-      System.out.print(htmlFinalScript);
       helper.setText(htmlFinalScript, true);
       helper.setTo(to);
       helper.setSubject("Habbo Hotel Reserva: " + reserveId);

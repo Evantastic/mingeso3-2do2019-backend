@@ -26,7 +26,7 @@ public class ReserveFormService {
   protected Client createOrFindClient(ReserveForm form) {
     Client client = new Client(0, form.getName(), form.getBirth(),
       form.getEmail(), form.getPhone());
-    return clientRepository.findByEmail(form.getEmail())
+    return clientRepository.findFirstByEmail(form.getEmail())
       .orElse(clientRepository.save(client));
   }
 
@@ -44,8 +44,9 @@ public class ReserveFormService {
     }
     Client client = this.createOrFindClient(form);
     Reserve reserve = this.createReserve(form, room, client);
+    reserve = reserveService.create(reserve);
     emailService.sendEmailWithTemplate(client.getEmail(),
       Integer.toString(reserve.getId()), client.getName());
-    return reserveService.create(reserve);
+    return reserve;
   }
 }
