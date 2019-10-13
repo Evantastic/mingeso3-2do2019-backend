@@ -1,4 +1,4 @@
-package mingeso.backend.service.reserveForm;
+package mingeso.backend.service.reserveform;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;

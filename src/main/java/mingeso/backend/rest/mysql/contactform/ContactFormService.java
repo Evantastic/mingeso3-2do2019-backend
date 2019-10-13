@@ -1,4 +1,4 @@
-package mingeso.backend.rest.mysql.contactForm;
+package mingeso.backend.rest.mysql.contactform;
 
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

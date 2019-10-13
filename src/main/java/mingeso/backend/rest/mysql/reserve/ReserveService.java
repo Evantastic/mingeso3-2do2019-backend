@@ -3,8 +3,6 @@ package mingeso.backend.rest.mysql.reserve;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import javax.mail.MessagingException;
-import java.io.FileNotFoundException;
 import java.util.List;
 
 @Service

@@ -1,4 +1,4 @@
-package mingeso.backend.service.reserveForm;
+package mingeso.backend.service.reserveform;
 
 import lombok.AllArgsConstructor;
 import mingeso.backend.rest.mysql.reserve.Reserve;

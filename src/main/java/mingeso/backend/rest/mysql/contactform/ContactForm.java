@@ -1,4 +1,4 @@
-package mingeso.backend.rest.mysql.contactForm;
+package mingeso.backend.rest.mysql.contactform;
 
 import lombok.*;
 import javax.persistence.*;

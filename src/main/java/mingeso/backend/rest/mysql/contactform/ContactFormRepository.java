@@ -1,4 +1,4 @@
-package mingeso.backend.rest.mysql.contactForm;
+package mingeso.backend.rest.mysql.contactform;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
