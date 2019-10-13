@@ -1,15 +1,26 @@
 package mingeso.backend.rest.mongo.room;
 
 import lombok.*;
-import mingeso.backend.rest.mongo.roomtype.RoomType;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@EqualsAndHashCode(callSuper = false)
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Document("Room")
-public class Room extends RoomType {
+public class Room{
 
+  @Id
+  private String id;
+
+  private String url;
+  private String title;
+  private int price;
+  private String description;
+  private int beds;
+  private int capacity;
+  private List<String> services;
   private int roomNumber;
 }

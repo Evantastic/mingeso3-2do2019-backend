@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Document("Room")
+@Document("RoomType")
 public class RoomType {
 
   @Id
