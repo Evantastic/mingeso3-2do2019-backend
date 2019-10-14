@@ -98,6 +98,7 @@ public class RoomTypeControllerTest {
     } catch (Exception e) {
       e.printStackTrace();
     }
+    assert result != null;
     String response = result.getResponse().getContentAsString();
     Assertions.assertThat(mapper.writeValueAsString(roomType))
       .isEqualToIgnoringWhitespace(response);
