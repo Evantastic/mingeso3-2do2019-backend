@@ -25,6 +25,7 @@ public class EmailService {
       helper.setSubject("Habbo Hotel Reserva: " + reserveId);
       emailSender.send(message);
     } catch (Exception ignored) {
+      System.out.println("Error Envio Email");
     }
   }
 }
