@@ -4,12 +4,10 @@ import lombok.AllArgsConstructor;
 import mingeso.backend.rest.mongo.room.Room;
 import mingeso.backend.rest.mongo.room.RoomService;
 import mingeso.backend.rest.mysql.client.Client;
-import mingeso.backend.rest.mysql.client.ClientRepository;
 import mingeso.backend.rest.mysql.client.ClientService;
 import mingeso.backend.rest.mysql.reserve.Reserve;
 import mingeso.backend.rest.mysql.reserve.ReserveRepository;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;

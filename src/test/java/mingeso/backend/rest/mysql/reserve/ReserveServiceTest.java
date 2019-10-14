@@ -22,7 +22,7 @@ public class ReserveServiceTest {
   @TestConfiguration
   static class ReserveServiceTestContextConfiguration {
     @Bean
-    public ReserveService ReserveService() { return new ReserveService(); }
+    public ReserveService reserveService() { return new ReserveService(); }
   }
 
   @Autowired
