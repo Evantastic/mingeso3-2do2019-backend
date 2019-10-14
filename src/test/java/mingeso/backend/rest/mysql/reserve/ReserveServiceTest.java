@@ -47,8 +47,6 @@ public class ReserveServiceTest {
   @Before
   public void setUpCreate() {
     Reserve reserve = new Reserve();
-    reserve.setEndDate(LocalDate.now().plusDays(1));
-    reserve.setStartDate(LocalDate.now().plusDays(1));
     Reserve found = new Reserve();
     found.setId(ID);
     Mockito.when(repository.save(reserve)).thenReturn(found);
@@ -81,8 +79,6 @@ public class ReserveServiceTest {
   @Test
   public void whenCreateReserveThenReserveShouldBeReturned(){
     Reserve reserve = new Reserve();
-    reserve.setStartDate(LocalDate.now());
-    reserve.setEndDate(LocalDate.now());
     Reserve found = service.create(reserve);
     Assertions.assertThat(found.getId()).isEqualTo(ID);
   }
