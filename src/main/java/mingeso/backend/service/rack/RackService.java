@@ -25,7 +25,16 @@ public class RackService {
 
   protected List<Reserve> getReservesBetweenTwoDates(LocalDate start,
                                                      LocalDate end) {
-    return reserveRepository.findAllByStartDateBetweenAndEndDateBetween(start, end, start, end);
+    List<Reserve> reserves1 = reserveRepository.
+      findAllByStartDateBetween(start, end);
+    List<Reserve> reserves2 = reserveRepository.
+      findAllByEndDateBetween(start, end);
+    for (Reserve reserve: reserves1) {
+      if (!reserves2.contains(reserve)) {
+        reserves2.add(reserve);
+      }
+    }
+    return reserves2;
   }
 
   public List<RackUnit> getRack(String start, String end) {

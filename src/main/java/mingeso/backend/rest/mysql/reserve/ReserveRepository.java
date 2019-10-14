@@ -8,5 +8,6 @@ import java.util.List;
 
 @Repository
 public interface ReserveRepository extends JpaRepository<Reserve, Integer> {
-  List<Reserve> findAllByStartDateBetweenAndEndDateBetween(LocalDate startDate1, LocalDate endDate1, LocalDate startDate2, LocalDate endDate2);
+  List<Reserve> findAllByStartDateBetween(LocalDate start, LocalDate end);
+  List<Reserve> findAllByEndDateBetween(LocalDate start, LocalDate end);
 }

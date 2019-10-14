@@ -34,9 +34,9 @@ public class RackServiceTest {
 
   @Test
   public void whenTwoValidDatesThenReturnArray() {
-    when(reserveRepository.findAllByStartDateBetweenAndEndDateBetween(START,
-      END, START, END)).thenReturn(this.getValidReserves());
-    assertThat(reserveRepository.findAllByStartDateBetweenAndEndDateBetween(START, END, START, END))
+    when(reserveRepository.findAllByStartDateBetween(START,
+      END)).thenReturn(this.getValidReserves());
+    assertThat(reserveRepository.findAllByStartDateBetween(START, END))
       .containsAll(this.getValidReserves());
   }
 }
