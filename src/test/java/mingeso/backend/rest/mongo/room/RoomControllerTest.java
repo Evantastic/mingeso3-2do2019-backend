@@ -42,35 +42,43 @@ public class RoomControllerTest {
   private static final int NUMBER = 50;
 
   @Test
-  public void givenRoomWhenGetRoomsThenReturnJsonArray() throws Exception {
+  public void givenRoomWhenGetRoomsThenReturnJsonArray(){
     Room roomType = new Room();
     List<Room> allRooms = new ArrayList<>();
     roomType.setTitle(TITLE);
     allRooms.add(roomType);
     given(service.getAll()).willReturn(allRooms);
-    mvc.perform(get(URL)
-      .contentType(APPLICATION_JSON))
-      .andExpect(status().isOk())
-      .andExpect(jsonPath("$",
-        hasSize(1)))
-      .andExpect(jsonPath("$[0].title",
-        is(TITLE)));
+    try {
+      mvc.perform(get(URL)
+        .contentType(APPLICATION_JSON))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$",
+          hasSize(1)))
+        .andExpect(jsonPath("$[0].title",
+          is(TITLE)));
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 
   @Test
-  public void givenIdWhenGetRoomByIdThenReturnJson() throws Exception {
+  public void givenIdWhenGetRoomByIdThenReturnJson(){
     Room roomType = new Room();
     roomType.setId(ID);
     given(service.getById(ID)).willReturn(roomType);
-    mvc.perform(get(URL + "/" + ID)
-      .contentType(APPLICATION_JSON))
-      .andExpect(status().isOk())
-      .andExpect(jsonPath("$.id",
-        is(ID)));
+    try {
+      mvc.perform(get(URL + "/" + ID)
+        .contentType(APPLICATION_JSON))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.id",
+          is(ID)));
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 
   @Test
-  public void whenCreateRoomThenReturnJson() throws Exception {
+  public void whenCreateRoomThenReturnJson(){
     Room room = new Room();
     room.setTitle(TITLE);
     room.setRoomNumber(NUMBER);
@@ -82,42 +90,50 @@ public class RoomControllerTest {
     room.setUrl(TITLE);
     room.setServices(Collections.singletonList(TITLE));
     given(service.create(room)).willReturn(room);
-    mvc.perform(post(URL)
-      .contentType(APPLICATION_JSON)
-      .content(mapper.writeValueAsString(room)))
-      .andExpect(status().isOk())
-      .andExpect(jsonPath("$.id",
-        is(room.getId())))
-      .andExpect(jsonPath("$.title",
-        is(room.getTitle())))
-      .andExpect(jsonPath("$.roomNumber",
-        is(room.getRoomNumber())))
-      .andExpect(jsonPath("$.beds",
-        is(room.getBeds())))
-      .andExpect(jsonPath("$.capacity",
-        is(room.getCapacity())))
-      .andExpect(jsonPath("$.description",
-        is(room.getDescription())))
-      .andExpect(jsonPath("$.price",
-        is(room.getPrice())))
-      .andExpect(jsonPath("$.url",
-        is(room.getUrl())))
-      .andExpect(jsonPath("$.services",
-        hasSize(1)))
-      .andExpect(jsonPath("$.services[0]",
-        is(room.getServices().get(0))));
+    try {
+      mvc.perform(post(URL)
+        .contentType(APPLICATION_JSON)
+        .content(mapper.writeValueAsString(room)))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.id",
+          is(room.getId())))
+        .andExpect(jsonPath("$.title",
+          is(room.getTitle())))
+        .andExpect(jsonPath("$.roomNumber",
+          is(room.getRoomNumber())))
+        .andExpect(jsonPath("$.beds",
+          is(room.getBeds())))
+        .andExpect(jsonPath("$.capacity",
+          is(room.getCapacity())))
+        .andExpect(jsonPath("$.description",
+          is(room.getDescription())))
+        .andExpect(jsonPath("$.price",
+          is(room.getPrice())))
+        .andExpect(jsonPath("$.url",
+          is(room.getUrl())))
+        .andExpect(jsonPath("$.services",
+          hasSize(1)))
+        .andExpect(jsonPath("$.services[0]",
+          is(room.getServices().get(0))));
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 
   @Test
-  public void whenDeleteRoomThenReturnJson() throws Exception {
+  public void whenDeleteRoomThenReturnJson(){
     Room roomType = new Room();
     roomType.setId(ID);
     roomType.setRoomNumber(NUMBER);
     given(service.delete(roomType.getId())).willReturn(roomType);
-    mvc.perform(delete(URL + "/" + ID)
-      .contentType(APPLICATION_JSON))
-      .andExpect(status().isOk())
-      .andExpect(jsonPath("$.roomNumber",
-        is(roomType.getRoomNumber())));
+    try {
+      mvc.perform(delete(URL + "/" + ID)
+        .contentType(APPLICATION_JSON))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.roomNumber",
+          is(roomType.getRoomNumber())));
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 }

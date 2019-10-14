@@ -43,35 +43,43 @@ public class ContactFormControllerTest {
   private static final String URL = "/api/rest/mysql/contactForms";
 
   @Test
-  public void givenContactFormWhenGetContactFormsThenReturnJsonArray() throws Exception {
+  public void givenContactFormWhenGetContactFormsThenReturnJsonArray(){
     ContactForm contactForm = new ContactForm();
     List<ContactForm> allContactForms = new ArrayList<>();
     contactForm.setName(NAME);
     allContactForms.add(contactForm);
     given(service.getAll()).willReturn(allContactForms);
-    mvc.perform(get(URL)
-      .contentType(APPLICATION_JSON))
-      .andExpect(status().isOk())
-      .andExpect(jsonPath("$",
-        hasSize(1)))
-      .andExpect(jsonPath("$[0].name",
-        is(NAME)));
+    try {
+      mvc.perform(get(URL)
+        .contentType(APPLICATION_JSON))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$",
+          hasSize(1)))
+        .andExpect(jsonPath("$[0].name",
+          is(NAME)));
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 
   @Test
-  public void givenIdWhenGetContactFormByIdThenReturnJson() throws Exception {
+  public void givenIdWhenGetContactFormByIdThenReturnJson(){
     ContactForm contactForm = new ContactForm();
     contactForm.setId(ID);
     given(service.getById(ID)).willReturn(contactForm);
-    mvc.perform(get(URL + "/" + ID)
-      .contentType(APPLICATION_JSON))
-      .andExpect(status().isOk())
-      .andExpect(jsonPath("$.id",
-        is(ID)));
+    try {
+      mvc.perform(get(URL + "/" + ID)
+        .contentType(APPLICATION_JSON))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.id",
+          is(ID)));
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 
   @Test
-  public void whenCreateContactFormThenReturnJson() throws Exception {
+  public void whenCreateContactFormThenReturnJson(){
     ContactForm contactForm = new ContactForm();
     contactForm.setId(ID);
     contactForm.setName(NAME);
@@ -79,34 +87,42 @@ public class ContactFormControllerTest {
     contactForm.setPhone(PHONE);
     contactForm.setDetails(DETAILS);
     given(service.create(contactForm)).willReturn(contactForm);
-    mvc.perform(post(URL)
-      .contentType(APPLICATION_JSON)
-      .content(mapper.writeValueAsString(contactForm)))
-      .andExpect(status().isOk())
-      .andExpect(jsonPath("$.id",
-        is(contactForm.getId())))
-      .andExpect(jsonPath("$.name",
-        is(contactForm.getName())))
-      .andExpect(jsonPath("$.email",
-        is(contactForm.getEmail())))
-      .andExpect(jsonPath("$.phone",
-        is(contactForm.getPhone())))
-      .andExpect(jsonPath("$.details",
-        is(contactForm.getDetails())));
+    try {
+      mvc.perform(post(URL)
+        .contentType(APPLICATION_JSON)
+        .content(mapper.writeValueAsString(contactForm)))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.id",
+          is(contactForm.getId())))
+        .andExpect(jsonPath("$.name",
+          is(contactForm.getName())))
+        .andExpect(jsonPath("$.email",
+          is(contactForm.getEmail())))
+        .andExpect(jsonPath("$.phone",
+          is(contactForm.getPhone())))
+        .andExpect(jsonPath("$.details",
+          is(contactForm.getDetails())));
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 
 
   @Test
-  public void whenDeleteContactFormThenReturnJson() throws Exception {
+  public void whenDeleteContactFormThenReturnJson(){
     ContactForm contactForm = new ContactForm();
     contactForm.setId(ID);
     contactForm.setName(NAME);
     given(service.delete(contactForm.getId())).willReturn(contactForm);
-    mvc.perform(delete(URL + "/" + ID)
-      .contentType(APPLICATION_JSON))
-      .andExpect(status().isOk())
-      .andExpect(jsonPath("$.name",
-        is(contactForm.getName())));
+    try {
+      mvc.perform(delete(URL + "/" + ID)
+        .contentType(APPLICATION_JSON))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.name",
+          is(contactForm.getName())));
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 }
 

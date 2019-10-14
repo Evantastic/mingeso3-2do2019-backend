@@ -1,5 +1,6 @@
 package mingeso.backend.rest.mongo.roomtype;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
@@ -22,6 +23,7 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.CoreMatchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -46,58 +48,75 @@ public class RoomTypeControllerTest {
   private static final int NUMBER = 50;
 
   @Test
-  public void givenRoomWhenGetRoomsThenReturnJsonArray() throws Exception {
+  public void givenRoomWhenGetRoomsThenReturnJsonArray(){
     RoomType roomType = new RoomType();
     List<RoomType> allRoomTypes = new ArrayList<>();
     roomType.setTitle(TITLE);
     allRoomTypes.add(roomType);
     given(service.getAll()).willReturn(allRoomTypes);
-    mvc.perform(get(URL)
-      .contentType(APPLICATION_JSON))
-      .andExpect(status().isOk())
-      .andExpect(jsonPath("$",
-        hasSize(1)))
-      .andExpect(jsonPath("$[0].title",
-        is(TITLE)));
+    try {
+      mvc.perform(get(URL)
+        .contentType(APPLICATION_JSON))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$",
+          hasSize(1)))
+        .andExpect(jsonPath("$[0].title",
+          is(TITLE)));
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 
   @Test
-  public void givenIdWhenGetRoomByIdThenReturnJson() throws Exception {
+  public void givenIdWhenGetRoomByIdThenReturnJson(){
     RoomType roomType = new RoomType();
     roomType.setId(ID);
     given(service.getById(ID)).willReturn(roomType);
-    mvc.perform(get(URL + "/" + ID)
-      .contentType(APPLICATION_JSON))
-      .andExpect(status().isOk())
-      .andExpect(jsonPath("$.id",
-        is(ID)));
+    try {
+      mvc.perform(get(URL + "/" + ID)
+        .contentType(APPLICATION_JSON))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.id",
+          is(ID)));
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 
   @Test
-  public void whenCreateRoomThenReturnJson() throws Exception {
+  public void whenCreateRoomThenReturnJson() throws UnsupportedEncodingException, JsonProcessingException {
     RoomType roomType = new RoomType(ID, TITLE, TITLE, NUMBER, TITLE, NUMBER, NUMBER,
       Collections.singletonList(TITLE));
     given(service.create(roomType)).willReturn(roomType);
-    MvcResult result = mvc.perform(post(URL)
-      .contentType(APPLICATION_JSON)
-      .content(mapper.writeValueAsString(roomType)))
-      .andExpect(status().isOk())
-      .andReturn();
+    MvcResult result = null;
+    try {
+      result = mvc.perform(post(URL)
+        .contentType(APPLICATION_JSON)
+        .content(mapper.writeValueAsString(roomType)))
+        .andExpect(status().isOk())
+        .andReturn();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
     String response = result.getResponse().getContentAsString();
     Assertions.assertThat(mapper.writeValueAsString(roomType))
       .isEqualToIgnoringWhitespace(response);
   }
 
   @Test
-  public void whenDeleteRoomThenReturnJson() throws Exception {
+  public void whenDeleteRoomThenReturnJson(){
     RoomType roomType = new RoomType();
     roomType.setId(ID);
     roomType.setTitle(TITLE);
     given(service.delete(roomType.getId())).willReturn(roomType);
-    mvc.perform(delete(URL + "/" + ID)
-      .contentType(APPLICATION_JSON))
-      .andExpect(status().isOk())
-      .andExpect(jsonPath("$.title",
-        is(roomType.getTitle())));
+    try {
+      mvc.perform(delete(URL + "/" + ID)
+        .contentType(APPLICATION_JSON))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.title",
+          is(roomType.getTitle())));
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 }

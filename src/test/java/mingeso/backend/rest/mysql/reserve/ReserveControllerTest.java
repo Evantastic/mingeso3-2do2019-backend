@@ -2,6 +2,7 @@ package mingeso.backend.rest.mysql.reserve;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureDataJpa;
@@ -49,35 +50,43 @@ public class ReserveControllerTest {
 
 
     @Test
-    public void givenReserveWhenGetReservesThenReturnJsonArray() throws Exception {
+    public void givenReserveWhenGetReservesThenReturnJsonArray(){
         Reserve reserve = new Reserve();
         List<Reserve> allReserves = new ArrayList<>();
         reserve.setClientId(CLIENTID);
         allReserves.add(reserve);
         given(service.getAll()).willReturn(allReserves);
-        mvc.perform(get(URL)
-                .contentType(APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$",
-                        hasSize(1)))
-                .andExpect(jsonPath("$[0].clientId",
-                        is(CLIENTID)));
+        try {
+            mvc.perform(get(URL)
+                    .contentType(APPLICATION_JSON))
+                    .andExpect(status().isOk())
+                    .andExpect(jsonPath("$",
+                            hasSize(1)))
+                    .andExpect(jsonPath("$[0].clientId",
+                            is(CLIENTID)));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
-    public void givenIdWhenGetReserveByIdThenReturnJson() throws Exception {
+    public void givenIdWhenGetReserveByIdThenReturnJson(){
         Reserve reserve = new Reserve();
         reserve.setId(ID);
         given(service.getById(ID)).willReturn(reserve);
-        mvc.perform(get(URL + "/" + ID)
-                .contentType(APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id",
-                        is(ID)));
+        try {
+            mvc.perform(get(URL + "/" + ID)
+                    .contentType(APPLICATION_JSON))
+                    .andExpect(status().isOk())
+                    .andExpect(jsonPath("$.id",
+                            is(ID)));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
-    public void whenCreateReserveThenReturnJson() throws Exception {
+    public void whenCreateReserveThenReturnJson(){
         Reserve reserve = new Reserve();
         reserve.setId(ID);
         reserve.setClientId(CLIENTID);
@@ -86,36 +95,44 @@ public class ReserveControllerTest {
         reserve.setEndDate(ENDDATE);
         reserve.setPrice(PRICE);
         given(service.create(reserve)).willReturn(reserve);
-        mvc.perform(post(URL)
-                .contentType(APPLICATION_JSON)
-                .content(mapper.writeValueAsString(reserve)))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id",
-                        is(reserve.getId())))
-                .andExpect(jsonPath("$.clientId",
-                        is(reserve.getClientId())))
-                .andExpect(jsonPath("$.roomId",
-                        is(reserve.getRoomId())))
-                //.andExpect(jsonPath("$.startDate",
-                        //is(reserve.getStartDate())))
-                //.andExpect(jsonPath("$.endDate",
-                        //is(reserve.getEndDate())))
-                .andExpect(jsonPath("$.price",
-                        is(reserve.getPrice())));
+        try {
+            mvc.perform(post(URL)
+                    .contentType(APPLICATION_JSON)
+                    .content(mapper.writeValueAsString(reserve)))
+                    .andExpect(status().isOk())
+                    .andExpect(jsonPath("$.id",
+                            is(reserve.getId())))
+                    .andExpect(jsonPath("$.clientId",
+                            is(reserve.getClientId())))
+                    .andExpect(jsonPath("$.roomId",
+                            is(reserve.getRoomId())))
+                    //.andExpect(jsonPath("$.startDate",
+                            //is(reserve.getStartDate())))
+                    //.andExpect(jsonPath("$.endDate",
+                            //is(reserve.getEndDate())))
+                    .andExpect(jsonPath("$.price",
+                            is(reserve.getPrice())));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
     @Test
-    public void whenDeleteReserveThenReturnJson() throws Exception {
+    public void whenDeleteReserveThenReturnJson(){
         Reserve reserve = new Reserve();
         reserve.setId(ID);
         reserve.setClientId(CLIENTID);
         given(service.delete(reserve.getId())).willReturn(reserve);
-        mvc.perform(delete(URL + "/" + ID)
-                .contentType(APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.clientId",
-                        is(reserve.getClientId())));
+        try {
+            mvc.perform(delete(URL + "/" + ID)
+                    .contentType(APPLICATION_JSON))
+                    .andExpect(status().isOk())
+                    .andExpect(jsonPath("$.clientId",
+                            is(reserve.getClientId())));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
