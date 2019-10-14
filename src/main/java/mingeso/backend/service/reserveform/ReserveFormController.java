@@ -19,7 +19,7 @@ public class ReserveFormController {
       return service.makeReservation(form);
   }
 
-  @PostMapping("multiple")
+  @PostMapping("/multiple")
   public List<Reserve> makeReservations(@RequestBody List<ReserveForm> forms) {
     return service.makeReservations(forms);
   }
