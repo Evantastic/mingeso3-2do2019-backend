@@ -1,7 +1,7 @@
 package mingeso.backend.service.reserveform;
 
 import mingeso.backend.rest.mongo.room.Room;
-import mingeso.backend.rest.mongo.room.RoomService;
+import mingeso.backend.rest.mongo.room.RoomRepository;
 import mingeso.backend.rest.mysql.client.Client;
 import mingeso.backend.rest.mysql.client.ClientRepository;
 import mingeso.backend.rest.mysql.reserve.Reserve;
@@ -16,7 +16,7 @@ public class ReserveFormService {
   @Autowired
   private ClientRepository clientRepository;
   @Autowired
-  private RoomService roomService;
+  private RoomRepository roomRepository;
   @Autowired
   private ReserveService reserveService;
 
@@ -27,6 +27,10 @@ public class ReserveFormService {
       .orElse(clientRepository.save(client));
   }
 
+  protected Room getByRoomNumber(int roomNumber) {
+    return roomRepository.findFirstByRoomNumber(roomNumber).orElse(null);
+  }
+
   protected Reserve createReserve(ReserveForm form, Room room, Client client) {
     int days =
       Period.between(form.getStartDate(), form.getEndDate()).getDays();
@@ -35,7 +39,7 @@ public class ReserveFormService {
   }
 
   public Reserve makeReservation(ReserveForm form) {
-    Room room = roomService.getById(form.getRoomId());
+    Room room = this.getByRoomNumber(form.getRoomNumber());
     if (room == null) {
       return null;
     }

@@ -10,6 +10,8 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -45,6 +47,8 @@ public class ReserveServiceTest {
   @Before
   public void setUpCreate() {
     Reserve reserve = new Reserve();
+    reserve.setEndDate(LocalDate.now().plusDays(1));
+    reserve.setStartDate(LocalDate.now().plusDays(1));
     Reserve found = new Reserve();
     found.setId(ID);
     Mockito.when(repository.save(reserve)).thenReturn(found);
@@ -77,6 +81,8 @@ public class ReserveServiceTest {
   @Test
   public void whenCreateReserveThenReserveShouldBeReturned(){
     Reserve reserve = new Reserve();
+    reserve.setStartDate(LocalDate.now());
+    reserve.setEndDate(LocalDate.now());
     Reserve found = service.create(reserve);
     Assertions.assertThat(found.getId()).isEqualTo(ID);
   }

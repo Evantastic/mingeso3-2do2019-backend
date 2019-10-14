@@ -19,5 +19,5 @@ public class ReserveForm {
   private LocalDate birth;
   private String email;
   private String phone;
-  private String roomId;
+  private int roomNumber;
 }
