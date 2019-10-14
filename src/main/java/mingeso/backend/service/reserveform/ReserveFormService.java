@@ -9,6 +9,8 @@ import mingeso.backend.rest.mysql.reserve.ReserveService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.Period;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class ReserveFormService {
@@ -46,5 +48,13 @@ public class ReserveFormService {
     Client client = this.createOrFindClient(form);
     Reserve reserve = this.createReserve(form, room, client);
     return reserveService.create(reserve);
+  }
+
+  public List<Reserve> makeReservations(List<ReserveForm> forms) {
+    List<Reserve> reserves = new ArrayList<>();
+    for (ReserveForm form: forms) {
+      reserves.add(this.makeReservation(form));
+    }
+    return reserves;
   }
 }
