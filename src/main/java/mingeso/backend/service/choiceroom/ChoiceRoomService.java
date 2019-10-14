@@ -14,11 +14,24 @@ public class ChoiceRoomService {
 
   private final RoomService service;
 
-  public List<ChoiceRoom> getAll() {
-    List<ChoiceRoom> choiceRooms = new ArrayList<>();
-    for (Room room: service.getAll()) {
-      choiceRooms.add(new ChoiceRoom(room.getRoomNumber(), room.getTitle()));
+  protected void addRoomNumberToCorrespondingTitle(List<ChoiceRoom> rooms,
+                                                   Room room) {
+    for (ChoiceRoom choiceRoom: rooms) {
+      if (choiceRoom.getRoomTitle().equalsIgnoreCase(room.getTitle())) {
+        choiceRoom.getRooms().add(room.getRoomNumber());
+        return;
+      }
     }
-    return choiceRooms;
+    List<Integer> roomNumbers = new ArrayList<>();
+    roomNumbers.add(room.getRoomNumber());
+    rooms.add(new ChoiceRoom(roomNumbers, room.getTitle()));
+  }
+
+  public List<ChoiceRoom> getAll() {
+    List<ChoiceRoom> rooms = new ArrayList<>();
+    for (Room room: service.getAll()) {
+      this.addRoomNumberToCorrespondingTitle(rooms, room);
+    }
+    return rooms;
   }
 }
