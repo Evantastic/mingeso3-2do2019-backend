@@ -56,8 +56,7 @@ public class RoomControllerTest {
           hasSize(1)))
         .andExpect(jsonPath("$[0].title",
           is(TITLE)));
-    } catch (Exception e) {
-      e.printStackTrace();
+    } catch (Exception ignored) {
     }
   }
 
@@ -72,8 +71,7 @@ public class RoomControllerTest {
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.id",
           is(ID)));
-    } catch (Exception e) {
-      e.printStackTrace();
+    } catch (Exception ignored) {
     }
   }
 
@@ -115,8 +113,7 @@ public class RoomControllerTest {
           hasSize(1)))
         .andExpect(jsonPath("$.services[0]",
           is(room.getServices().get(0))));
-    } catch (Exception e) {
-      e.printStackTrace();
+    } catch (Exception ignored) {
     }
   }
 
@@ -132,8 +129,7 @@ public class RoomControllerTest {
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.roomNumber",
           is(roomType.getRoomNumber())));
-    } catch (Exception e) {
-      e.printStackTrace();
+    } catch (Exception ignored) {
     }
   }
 }

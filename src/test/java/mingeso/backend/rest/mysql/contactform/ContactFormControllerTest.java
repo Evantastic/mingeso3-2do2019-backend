@@ -57,8 +57,7 @@ public class ContactFormControllerTest {
           hasSize(1)))
         .andExpect(jsonPath("$[0].name",
           is(NAME)));
-    } catch (Exception e) {
-      e.printStackTrace();
+    } catch (Exception ignored) {
     }
   }
 
@@ -73,8 +72,7 @@ public class ContactFormControllerTest {
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.id",
           is(ID)));
-    } catch (Exception e) {
-      e.printStackTrace();
+    } catch (Exception ignored) {
     }
   }
 
@@ -102,8 +100,7 @@ public class ContactFormControllerTest {
           is(contactForm.getPhone())))
         .andExpect(jsonPath("$.details",
           is(contactForm.getDetails())));
-    } catch (Exception e) {
-      e.printStackTrace();
+    } catch (Exception ignored) {
     }
   }
 
@@ -131,8 +128,7 @@ public class ContactFormControllerTest {
                       is(contactForm.getPhone())))
               .andExpect(jsonPath("$.details",
                       is(contactForm.getDetails())));
-    } catch (Exception e) {
-      e.printStackTrace();
+    } catch (Exception ignored) {
     }
   }
 
@@ -148,8 +144,7 @@ public class ContactFormControllerTest {
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.name",
           is(contactForm.getName())));
-    } catch (Exception e) {
-      e.printStackTrace();
+    } catch (Exception ignored) {
     }
   }
 }

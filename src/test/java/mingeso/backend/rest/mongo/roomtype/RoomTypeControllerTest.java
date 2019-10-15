@@ -62,8 +62,7 @@ public class RoomTypeControllerTest {
           hasSize(1)))
         .andExpect(jsonPath("$[0].title",
           is(TITLE)));
-    } catch (Exception e) {
-      e.printStackTrace();
+    } catch (Exception ignored) {
     }
   }
 
@@ -78,8 +77,7 @@ public class RoomTypeControllerTest {
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.id",
           is(ID)));
-    } catch (Exception e) {
-      e.printStackTrace();
+    } catch (Exception ignored) {
     }
   }
 
@@ -95,8 +93,7 @@ public class RoomTypeControllerTest {
         .content(mapper.writeValueAsString(roomType)))
         .andExpect(status().isOk())
         .andReturn();
-    } catch (Exception e) {
-      e.printStackTrace();
+    } catch (Exception ignored) {
     }
     assert result != null;
     String response = result.getResponse().getContentAsString();
@@ -116,8 +113,7 @@ public class RoomTypeControllerTest {
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.title",
           is(roomType.getTitle())));
-    } catch (Exception e) {
-      e.printStackTrace();
+    } catch (Exception ignored) {
     }
   }
 }

@@ -63,14 +63,6 @@ public class ReserveServiceTest {
   }
 
   @Before
-  public void setUpUpdate() {
-    Reserve reserve = new Reserve();
-    Reserve found = new Reserve();
-    found.setId(ID);
-    Mockito.when(repository.save(reserve)).thenReturn(found);
-  }
-
-  @Before
   public void setUpFindByInvalidId() {
     Optional<Reserve> empty = Optional.empty();
     Mockito.when(repository.findById(INVALIDID)).thenReturn(empty);
@@ -94,14 +86,6 @@ public class ReserveServiceTest {
     List<Reserve> found = service.getAll();
     Assertions.assertThat(found.size()).isEqualTo(3);
   }
-
-  /*@Test
-  public void whenUpdateReserveThenReserveShouldBeReturned(){
-    Reserve reserve = new Reserve();
-    Reserve found = service.update(ID,reserve);
-    Assertions.assertThat(found.getId()).isEqualTo(ID);
-  }*/
-
 
   @Test
   public void whenDeleteValidReserveThenReturnReserve() {

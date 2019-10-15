@@ -63,8 +63,7 @@ public class ReserveControllerTest {
                             hasSize(1)))
                     .andExpect(jsonPath("$[0].clientId",
                             is(CLIENTID)));
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ignored) {
         }
     }
 
