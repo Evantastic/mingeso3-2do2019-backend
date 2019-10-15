@@ -107,6 +107,34 @@ public class ContactFormControllerTest {
     }
   }
 
+  @Test
+  public void whenUpdateContactFormThenReturnJson(){
+    ContactForm contactForm = new ContactForm();
+    contactForm.setId(ID);
+    contactForm.setName(NAME);
+    contactForm.setEmail(EMAIL);
+    contactForm.setPhone(PHONE);
+    contactForm.setDetails(DETAILS);
+    given(service.update(ID,contactForm)).willReturn(contactForm);
+    try {
+      mvc.perform(post(URL+"/"+ID)
+              .contentType(APPLICATION_JSON)
+              .content(mapper.writeValueAsString(contactForm)))
+              .andExpect(status().isOk())
+              .andExpect(jsonPath("$.id",
+                      is(contactForm.getId())))
+              .andExpect(jsonPath("$.name",
+                      is(contactForm.getName())))
+              .andExpect(jsonPath("$.email",
+                      is(contactForm.getEmail())))
+              .andExpect(jsonPath("$.phone",
+                      is(contactForm.getPhone())))
+              .andExpect(jsonPath("$.details",
+                      is(contactForm.getDetails())));
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
 
   @Test
   public void whenDeleteContactFormThenReturnJson(){

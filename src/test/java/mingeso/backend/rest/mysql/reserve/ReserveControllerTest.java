@@ -105,10 +105,6 @@ public class ReserveControllerTest {
                             is(reserve.getClientId())))
                     .andExpect(jsonPath("$.roomId",
                             is(reserve.getRoomId())))
-                    //.andExpect(jsonPath("$.startDate",
-                            //is(reserve.getStartDate())))
-                    //.andExpect(jsonPath("$.endDate",
-                            //is(reserve.getEndDate())))
                     .andExpect(jsonPath("$.price",
                             is(reserve.getPrice())));
         } catch (Exception e) {
@@ -116,6 +112,33 @@ public class ReserveControllerTest {
         }
     }
 
+   @Test
+    public void whenUpdateReserveThenReturnJson(){
+        Reserve reserve = new Reserve();
+        reserve.setId(ID);
+        reserve.setClientId(CLIENTID);
+        reserve.setRoomId(ROOMID);
+        reserve.setStartDate(STARTDATE);
+        reserve.setEndDate(ENDDATE);
+        reserve.setPrice(PRICE);
+        given(service.update(ID,reserve)).willReturn(reserve);
+        try {
+            mvc.perform(post(URL+"/"+ID)
+                    .contentType(APPLICATION_JSON)
+                    .content(mapper.writeValueAsString(reserve)))
+                    .andExpect(status().isOk())
+                    .andExpect(jsonPath("$.id",
+                            is(reserve.getId())))
+                    .andExpect(jsonPath("$.clientId",
+                            is(reserve.getClientId())))
+                    .andExpect(jsonPath("$.roomId",
+                            is(reserve.getRoomId())))
+                    .andExpect(jsonPath("$.price",
+                            is(reserve.getPrice())));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @Test
     public void whenDeleteReserveThenReturnJson(){
