@@ -78,8 +78,7 @@ public class ReserveControllerTest {
                     .andExpect(status().isOk())
                     .andExpect(jsonPath("$.id",
                             is(ID)));
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ignored) {
         }
     }
 
@@ -106,8 +105,7 @@ public class ReserveControllerTest {
                             is(reserve.getRoomId())))
                     .andExpect(jsonPath("$.price",
                             is(reserve.getPrice())));
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ignored) {
         }
     }
 
@@ -134,8 +132,7 @@ public class ReserveControllerTest {
                             is(reserve.getRoomId())))
                     .andExpect(jsonPath("$.price",
                             is(reserve.getPrice())));
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ignored) {
         }
     }
 
@@ -151,8 +148,7 @@ public class ReserveControllerTest {
                     .andExpect(status().isOk())
                     .andExpect(jsonPath("$.clientId",
                             is(reserve.getClientId())));
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ignored) {
         }
     }
 
