@@ -101,5 +101,4 @@ public class RoomServiceTest {
     Room found = service.delete(INVALIDID);
     Assertions.assertThat(found).isNull();
   }
-
 }

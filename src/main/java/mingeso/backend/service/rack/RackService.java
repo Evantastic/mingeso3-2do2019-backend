@@ -45,10 +45,16 @@ public class RackService {
       endDate)) {
       Client client = clientService.getById(reserve.getClientId());
       Room room = roomService.getById(reserve.getRoomId());
-      RackUnit rackUnit = new RackUnit(client.getName(),
-        room.getRoomNumber(), reserve.getStartDate(), reserve.getEndDate());
+      RackUnit rackUnit = new RackUnit.Builder()
+              .setClientName(client.getName())
+              .setRoomNumber(room.getRoomNumber())
+              .setStartDate(reserve.getStartDate())
+              .setEndDate(reserve.getEndDate())
+              .build();
+
       rack.add(rackUnit);
     }
+
     return rack;
   }
 }

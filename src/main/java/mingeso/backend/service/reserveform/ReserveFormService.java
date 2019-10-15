@@ -34,8 +34,7 @@ public class ReserveFormService {
   }
 
   protected Reserve createReserve(ReserveForm form, Room room, Client client) {
-    int days =
-      Period.between(form.getStartDate(), form.getEndDate()).getDays();
+    int days = Period.between(form.getStartDate(), form.getEndDate()).getDays();
     return new Reserve(0, client.getId(), room.getId(),
       form.getStartDate(), form.getEndDate(), room.getPrice()*days);
   }

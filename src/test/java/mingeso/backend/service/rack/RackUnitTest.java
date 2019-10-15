@@ -16,8 +16,13 @@ public class RackUnitTest {
 
   @Test
   public void getterAndSetterAndConstructors() {
-    RackUnit rack1 = new RackUnit(NAME, NUMBER, NOW, NOW);
-    RackUnit rack2 = new RackUnit();
+    RackUnit rack1 = new RackUnit.Builder()
+            .setClientName(NAME)
+            .setRoomNumber(NUMBER)
+            .setStartDate(NOW)
+            .setEndDate(NOW)
+            .build();
+    RackUnit rack2 = new RackUnit.Builder().build();
     rack2.setClientName(NAME);
     rack2.setEndDate(NOW);
     rack2.setStartDate(NOW);
