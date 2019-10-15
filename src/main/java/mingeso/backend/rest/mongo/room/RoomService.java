@@ -20,7 +20,7 @@ public class RoomService {
   public Room getById(String id) {
     return repository.findById(id).orElse(null);
   }
-
+  // martes 15 octubre 2019
   public Room create(Room newRoom) {
     return repository.save(newRoom);
   }
